@@ -6,7 +6,7 @@ librarian::shelf(ggplot2, cowplot, lubridate, rvest,dplyr, viridis, tidyverse, c
 covid <- "https://covid19-projections.com/#view-projections"
 covid <- read_html(covid)
 
-#Scrap tables
+#Scrape tables
 covidtable <- covid %>%
   html_nodes("table") %>%
   html_table(fill = TRUE)

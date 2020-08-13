@@ -1,3 +1,7 @@
+#--------------------LOAD PACKAGES--------------
+install.packages("librarian")
+librarian::shelf(ggplot2, cowplot, lubridate, rvest,dplyr, viridis, tidyverse, countrycode)
+
 #--------------------------DRAW MAPS--------------------------------------
 world <- map_data("world")
 world <- world %>%
@@ -5,7 +9,7 @@ world <- world %>%
   dplyr::mutate(Country = countrycode(Country, origin = 'country.name', destination = 'iso3c'))
 
 #Join datasets
-worldmap <- inner_join(world, covidproj, by="Country")
+worldmap <- full_join(world, covidproj, by="Country")
 
 #ggplot theme
 plain <- theme(
@@ -47,4 +51,8 @@ two <- ggplot(data = worldmap, mapping = aes(x = long, y = lat, group = group)) 
   plain
 
 #Display all maps together
-cowplot::plot_grid(one,two,three, align= "v", ncol=1)
+joinmap <- cowplot::plot_grid(one,two,three, align= "v", ncol=1)
+joinmap
+
+#Save map
+ggsave("covidmap.pdf", joinmap, width=12, height = 10, units="in")

@@ -1,4 +1,4 @@
-#--------------------LOAD PACKAGES--------------
+#--------------------LOAD PACKAGES-----------------
 install.packages("librarian")
 librarian::shelf(ggplot2, cowplot, lubridate, rvest,dplyr, viridis, tidyverse, countrycode)
 
